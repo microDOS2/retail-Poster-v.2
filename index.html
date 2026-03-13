@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>microDOS(2) | Precision Focus. Zero Guesswork.</title>
+    
+    <!--
+    PALETTE: Vibrant Tech & Wellness (Primary: #2563eb Blue, Accent: #f59e0b Amber, Secondary: #10b981 Emerald, Dark: #1e293b Slate)
+    -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .material-card {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .material-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        @media (max-width: 640px) {
+            .chart-container {
+                height: 280px;
+            }
+        }
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #3b82f6, #10b981);
+        }
+        .btn-primary {
+            background-color: #2563eb;
+            color: white;
+            font-weight: 700;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.4);
+            transition: all 0.2s;
+            display: inline-block;
+        }
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+            box-shadow: 0 6px 8px -1px rgba(37, 99, 235, 0.6);
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased overflow-x-hidden">
+
+    <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="font-extrabold text-2xl tracking-tighter text-slate-900">micro<span class="text-blue-600">DOS(2)</span></div>
+            
+            <div class="flex items-center gap-6">
+                <div class="hidden md:flex space-x-8 text-sm font-bold text-slate-600">
+                    <a href="#precision" class="hover:text-blue-600 transition">The Upgrade</a>
+                    <a href="#efficiency" class="hover:text-emerald-500 transition">Efficiency</a>
+                    <a href="#clinical-data" class="hover:text-purple-500 transition">Clinical Data</a>
+                    <a href="#trial" class="hover:text-amber-500 transition">Trial</a>
+                </div>
+                <a href="#trial" class="btn-primary text-sm py-2 px-6 whitespace-nowrap">Claim $12.95 Trial</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-slate-900 text-white pt-32 pb-24 px-4 text-center relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#3b82f6 1px, transparent 1px); background-size: 30px 30px;"></div>
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div class="inline-block bg-blue-500/20 text-blue-300 font-bold px-4 py-1 rounded-full text-sm mb-6 border border-blue-500/30">
+                Next-Generation Cognitive Enhancement
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight leading-tight">
+                Stop Gambling With <br><span class="gradient-text">Your Workday.</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-300 mb-10 max-w-3xl mx-auto leading-relaxed font-light">
+                Microdosing is unpredictable. microDOS(2) uses a precise 2.0mg protocol to enhance focus, eliminate nausea, and activate in ~10- 15 minutes.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="#trial" class="btn-primary text-lg px-8 py-4 w-full sm:w-auto text-center">Start Your $12.95 Trial</a>
+                <a href="#precision" class="text-white font-semibold hover:text-blue-400 transition flex items-center gap-2 mt-4 sm:mt-0">
+                    See the Data <span class="text-xl">↓</span>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 max-w-4xl mx-auto text-left">
+                <div class="border-l-4 border-blue-500 pl-4">
+                    <div class="text-white font-bold text-2xl">2.0mg</div>
+                    <div class="text-sm text-slate-400 font-semibold">Exact Metocin Dose</div>
+                </div>
+                <div class="border-l-4 border-emerald-500 pl-4">
+                    <div class="text-white font-bold text-2xl">10 Mins</div>
+                    <div class="text-sm text-slate-400 font-semibold">Guaranteed Onset</div>
+                </div>
+                <div class="border-l-4 border-amber-500 pl-4">
+                    <div class="text-white font-bold text-2xl">Zero</div>
+                    <div class="text-sm text-slate-400 font-semibold">Nausea / Chitin</div>
+                </div>
+                <div class="border-l-4 border-purple-500 pl-4">
+                    <div class="text-white font-bold text-2xl">100%</div>
+                    <div class="text-sm text-slate-400 font-semibold">Legal to Ship</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-16 space-y-24">
+
+        <!-- Precision Section -->
+        <section id="precision" class="scroll-mt-32">
+            <div class="text-center mb-12 max-w-3xl mx-auto">
+                <h2 class="text-4xl font-extrabold mb-4 text-slate-900">The Problem with "Shrooms"</h2>
+                <p class="text-xl text-slate-600 leading-relaxed">
+                    Organic mushrooms vary wildly in potency from stem to cap. A 0.2g dose today might feel like nothing, while 0.2g tomorrow ruins your Tuesday morning meetings. <strong class="text-blue-600">microDOS(2) eliminates the variable.</strong>
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center material-card border-t-8 border-blue-500">
+                <div class="w-full">
+                    <div class="chart-container">
+                        <canvas id="variableChart"></canvas>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold text-slate-900">Engineered for Absolute Reliability</h3>
+                    <p class="text-slate-600">
+                        We replaced the unstable organic plant matter with a 100% pure, lab-grade 4-HO-MET synthetic analog.
+                    </p>
+                    <div class="bg-blue-50 p-6 rounded-xl border border-blue-100">
+                        <h4 class="font-bold text-blue-900 mb-2 flex items-center"><span class="text-xl mr-2">🎯</span> The Precision Advantage</h4>
+                        <p class="text-sm text-blue-800">Every single scored pill contains exactly 2.0mg. You get the exact same baseline cognitive lift every single time you take it. No surprises. No accidental threshold crossing. Just pure, functional focus.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Efficiency Section -->
+        <section id="efficiency" class="scroll-mt-32">
+            <div class="grid md:grid-cols-2 gap-12 items-center material-card border-t-8 border-emerald-500 flex-row-reverse bg-slate-900 text-white">
+                <div class="order-2 md:order-1 space-y-6">
+                    <span class="bg-emerald-500 text-slate-900 font-bold px-3 py-1 rounded text-sm uppercase tracking-wide">Time is Money</span>
+                    <h3 class="text-3xl font-bold">On-Demand Clarity in 10 Minutes Flat.</h3>
+                    <p class="text-slate-300">
+                        Traditional raw mushrooms contain chitin—a tough biological material that human stomachs cannot easily digest. This causes intense nausea and delays the onset of your microdose by up to 90 minutes. 
+                    </p>
+                    <ul class="space-y-4 mt-6">
+                        <li class="flex items-center">
+                            <span class="text-emerald-400 text-2xl mr-3 font-bold">✓</span>
+                            <span class="text-lg">Zero Nausea or GI Distress</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-emerald-400 text-2xl mr-3 font-bold">✓</span>
+                            <span class="text-lg">Bypasses organic digestion delays</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-emerald-400 text-2xl mr-3 font-bold">✓</span>
+                            <span class="text-lg">Predictable scheduling for deep work</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="w-full order-1 md:order-2 bg-white rounded-xl p-4">
+                    <div class="chart-container">
+                        <canvas id="onsetChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Clinical Data Section -->
+        <section id="clinical-data" class="scroll-mt-32">
+            <div class="text-center mb-12 max-w-3xl mx-auto">
+                <h2 class="text-4xl font-extrabold mb-4 text-slate-900">The Science: 5 Verified Output Benefits</h2>
+                <p class="text-xl text-slate-600 leading-relaxed">
+                    Data synthesized from recent observational studies and peer-reviewed literature. Here are the documented neurological returns of sub-hallucinogenic protocols, and exactly <strong>why</strong> they occur.
+                </p>
+            </div>
+
+            <div class="space-y-6 max-w-5xl mx-auto">
+                <div class="bg-white border-l-4 border-blue-500 p-6 rounded-r-xl shadow-md hover:shadow-lg transition">
+                    <div class="flex flex-col md:flex-row gap-6 items-start">
+                        <div class="text-4xl">⚡</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">1. Acute, On-Demand Focus & Mood Elevation</h3>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-slate-50 p-4 rounded text-sm">
+                                    <strong class="text-blue-700 uppercase tracking-wide text-xs">The Fact:</strong><br>
+                                    <span class="text-slate-700">Measurable improvements in focus, mood, and cognitive output are highly acute—they reliably occur specifically on dosing days, without lingering residual intoxication.</span>
+                                </div>
+                                <div class="bg-blue-50/50 p-4 rounded text-sm">
+                                    <strong class="text-slate-900 uppercase tracking-wide text-xs">The Mechanism (Why):</strong><br>
+                                    <span class="text-slate-700">It provides a targeted, temporary neurochemical upregulation. It functions as an "on-switch" for workflow without inducing systemic physiological dependency.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border-l-4 border-emerald-500 p-6 rounded-r-xl shadow-md hover:shadow-lg transition">
+                    <div class="flex flex-col md:flex-row gap-6 items-start">
+                        <div class="text-4xl">🛡️</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">2. Direct Reduction of Neuroinflammation</h3>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-slate-50 p-4 rounded text-sm">
+                                    <strong class="text-emerald-700 uppercase tracking-wide text-xs">The Fact:</strong><br>
+                                    <span class="text-slate-700">Literature identifies that sub-hallucinogenic doses of serotonergic compounds physically target and reduce neuroinflammation markers without suppressing the wider immune system.</span>
+                                </div>
+                                <div class="bg-emerald-50/50 p-4 rounded text-sm">
+                                    <strong class="text-slate-900 uppercase tracking-wide text-xs">The Mechanism (Why):</strong><br>
+                                    <span class="text-slate-700">By acting as a 5-HT2A receptor agonist, it mitigates the biological inflammation that directly causes subjective "brain fog," cognitive fatigue, and depressive stagnation.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border-l-4 border-amber-500 p-6 rounded-r-xl shadow-md hover:shadow-lg transition">
+                    <div class="flex flex-col md:flex-row gap-6 items-start">
+                        <div class="text-4xl">🔄</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">3. Suppression of Ruminative Anxiety</h3>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-slate-50 p-4 rounded text-sm">
+                                    <strong class="text-amber-700 uppercase tracking-wide text-xs">The Fact:</strong><br>
+                                    <span class="text-slate-700">Longitudinal studies consistently record statistical decreases in baseline generalized anxiety and repetitive depressive thoughts compared to non-users.</span>
+                                </div>
+                                <div class="bg-amber-50/50 p-4 rounded text-sm">
+                                    <strong class="text-slate-900 uppercase tracking-wide text-xs">The Mechanism (Why):</strong><br>
+                                    <span class="text-slate-700">It disrupts the brain's Default Mode Network (DMN). The DMN is responsible for the rigid, hyper-fixated loops of negative overthinking. Disrupting it forces the brain out of "autopilot" anxiety.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border-l-4 border-purple-500 p-6 rounded-r-xl shadow-md hover:shadow-lg transition">
+                    <div class="flex flex-col md:flex-row gap-6 items-start">
+                        <div class="text-4xl">🧠</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">4. Catalyzed Cognitive Flexibility</h3>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-slate-50 p-4 rounded text-sm">
+                                    <strong class="text-purple-700 uppercase tracking-wide text-xs">The Fact:</strong><br>
+                                    <span class="text-slate-700">Qualitative data highlights reliable enhancements in lateral thinking, creative problem-solving, and adaptability under pressure.</span>
+                                </div>
+                                <div class="bg-purple-50/50 p-4 rounded text-sm">
+                                    <strong class="text-slate-900 uppercase tracking-wide text-xs">The Mechanism (Why):</strong><br>
+                                    <span class="text-slate-700">The compound forces temporary neuroplasticity. It physically lowers the established, rigid neurological pathways of the adult brain, allowing novel connections (new solutions) to form easily.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border-l-4 border-slate-700 p-6 rounded-r-xl shadow-md hover:shadow-lg transition">
+                    <div class="flex flex-col md:flex-row gap-6 items-start">
+                        <div class="text-4xl">👁️</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">5. Unintoxicated Present-State Engagement</h3>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-slate-50 p-4 rounded text-sm">
+                                    <strong class="text-slate-700 uppercase tracking-wide text-xs">The Fact:</strong><br>
+                                    <span class="text-slate-700">Observational reports repeatedly note users experiencing profound emotional presence (e.g., heightened patience) without any discernible intoxication.</span>
+                                </div>
+                                <div class="bg-slate-100 p-4 rounded text-sm">
+                                    <strong class="text-slate-900 uppercase tracking-wide text-xs">The Mechanism (Why):</strong><br>
+                                    <span class="text-slate-700">Because a strict sub-perceptual dose operates entirely below the threshold required for sensory hallucination or motor impairment, leaving executive function completely intact.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trial Section -->
+        <section id="trial" class="scroll-mt-32">
+            <div class="text-center mb-12 max-w-3xl mx-auto">
+                <h2 class="text-4xl font-extrabold mb-4 text-slate-900">Zero-Friction Entry</h2>
+                <p class="text-xl text-slate-600 leading-relaxed">
+                    Testing a new cognitive protocol shouldn't require a massive upfront investment. Start with our risk-free trial to objectively measure your biological response.
+                </p>
+            </div>
+
+            <div class="material-card border-t-8 border-amber-500 max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="text-center p-6 bg-slate-50 rounded-xl border border-slate-200 flex flex-col justify-center">
+                        <div class="text-5xl mb-4">🏪</div>
+                        <h4 class="font-bold text-xl text-slate-900">Over-the-Counter Access</h4>
+                        <p class="text-slate-600 mt-2">Because 4-HO-MET is an unscheduled compound, it is legally available for immediate, over-the-counter purchase today.</p>
+                    </div>
+                    <div class="text-center p-6 bg-amber-50 rounded-xl border border-amber-200 shadow-md flex flex-col justify-center transform scale-105">
+                        <div class="text-amber-500 font-black text-4xl mb-2">$12.95</div>
+                        <h4 class="font-bold text-xl text-slate-900">Low-Risk Trial Pack</h4>
+                        <p class="text-slate-700 mt-2">Grab a 2-pill precision pack right now. Test the baseline efficacy with zero financial stress before scaling up.</p>
+                        <button class="mt-6 bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-6 rounded-full w-full transition cursor-default">Available at the Counter</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Outcomes Section -->
+        <section id="outcomes" class="scroll-mt-32 mb-20">
+            <div class="text-center mb-12 max-w-3xl mx-auto">
+                <h2 class="text-4xl font-extrabold mb-4 text-slate-900">The Exact ROI on Your Brain</h2>
+                <p class="text-xl text-slate-600 leading-relaxed">
+                    This is not a party drug. It is a highly specific tool engineered to push you into the flow state, mapped clearly against objective pharmacological facts.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-12 gap-8">
+                <div class="md:col-span-7 material-card bg-white border-t-8 border-purple-500 flex flex-col justify-center">
+                    <h3 class="text-2xl font-bold mb-6 text-center text-slate-900">Targeted Cognitive Lift</h3>
+                    <div class="w-full flex justify-center">
+                        <div class="chart-container" style="height: 350px;">
+                            <canvas id="radarChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:col-span-5 space-y-6 flex flex-col justify-center">
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-6 shadow-sm">
+                        <div class="flex items-center mb-3">
+                            <span class="text-blue-500 text-2xl mr-3 font-bold">✓</span>
+                            <h4 class="font-bold text-slate-900 text-lg">The "Flow" Mechanism</h4>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed">Users report an immediate, gentle lift that quiets background anxiety and severely narrows focus on the task at hand. It forces present-state engagement.</p>
+                    </div>
+
+                    <div class="bg-red-50 border border-red-200 rounded-xl p-6 shadow-sm">
+                        <div class="flex items-center mb-3">
+                            <span class="text-red-500 text-2xl mr-3 font-bold">!</span>
+                            <h4 class="font-bold text-red-900 text-lg">Strict Warning: Do Not Exceed</h4>
+                        </div>
+                        <p class="text-red-800 text-sm leading-relaxed">Fact: 4-HO-MET is highly active at low doses. Taking more may result in sensory distortion and hallucinations that might ruin your workday.</p>
+                    </div>
+                    
+                    <a href="#trial" class="btn-primary text-center py-4 text-lg mt-4 shadow-lg shadow-blue-500/30">Optimize Your Mind Today</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-950 text-slate-400 py-16 text-center border-t border-slate-800">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="font-extrabold text-3xl tracking-tighter text-slate-700 mb-6">micro<span class="text-slate-600">DOS(2)</span></div>
+            <p class="text-lg leading-relaxed mb-8 max-w-2xl mx-auto text-slate-500">
+                Precision psychedelics, simplified for the modern mind. By replacing organic instability with synthetic exactitude, you gain absolute control over your cognitive output.
+            </p>
+            <div class="text-xs text-slate-700 max-w-xl mx-auto">
+                Strictly 21+. As an unscheduled gray-market analog, statements regarding efficacy have not been evaluated by the FDA. It does not treat or cure diseases.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function wrapLabel(label) {
+            if (label.length <= 16) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > 16) {
+                    if (currentLine.trim() !== '') lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            if (currentLine.trim() !== '') lines.push(currentLine.trim());
+            return lines;
+        }
+
+        const commonTooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // Precision Chart
+        const ctx1 = document.getElementById('variableChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: [
+                    wrapLabel('Dose Accuracy'), 
+                    wrapLabel('Onset Speed'), 
+                    wrapLabel('GI Comfort'), 
+                    wrapLabel('Legal Safety')
+                ],
+                datasets: [
+                    {
+                        label: 'Standard Mushroom Protocol',
+                        data: [3, 2, 2, 1],
+                        backgroundColor: '#94a3b8',
+                        borderWidth: 0,
+                        borderRadius: 6
+                    },
+                    {
+                        label: 'microDOS(2) Synthetic',
+                        data: [10, 10, 10, 10],
+                        backgroundColor: '#2563eb',
+                        borderWidth: 0,
+                        borderRadius: 6
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { font: { family: 'Inter', weight: 'bold' } } },
+                    tooltip: commonTooltipConfig
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 10,
+                        ticks: { display: false },
+                        grid: { display: false }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: { family: 'Inter', weight: 'bold' } }
+                    }
+                }
+            }
+        });
+
+        // Efficiency Chart
+        const ctx2 = document.getElementById('onsetChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: ['0m', '10m', '30m', '60m', '90m'],
+                datasets: [
+                    {
+                        label: 'microDOS(2) Immediate Release',
+                        data: [0, 8.5, 8.5, 8.2, 8],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                        borderWidth: 4,
+                        pointBackgroundColor: '#10b981',
+                        pointRadius: 6,
+                        fill: true,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Organic Digestion Delay',
+                        data: [0, 0, 1, 6, 8],
+                        borderColor: '#cbd5e1',
+                        borderDash: [5, 5],
+                        borderWidth: 3,
+                        pointBackgroundColor: '#cbd5e1',
+                        pointRadius: 5,
+                        fill: false,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { font: { family: 'Inter', weight: 'bold' }, color: '#334155' } },
+                    tooltip: commonTooltipConfig
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 10,
+                        title: { display: true, text: 'Cognitive Lift Intensity', color: '#64748b', font: { family: 'Inter', weight: 'bold' } },
+                        ticks: { color: '#64748b' }
+                    },
+                    x: {
+                        ticks: { color: '#64748b', font: { family: 'Inter', weight: 'bold' } }
+                    }
+                }
+            }
+        });
+
+        // ROI Radar Chart
+        const ctx4 = document.getElementById('radarChart').getContext('2d');
+        new Chart(ctx4, {
+            type: 'radar',
+            data: {
+                labels: [
+                    wrapLabel('Deep Work Focus'), 
+                    wrapLabel('Creative Output'), 
+                    wrapLabel('Anxiety Reduction'), 
+                    wrapLabel('Present Presence')
+                ],
+                datasets: [{
+                    label: 'Guaranteed ROI Profile',
+                    data: [9.0, 7.5, 8.5, 8.0],
+                    backgroundColor: 'rgba(168, 85, 247, 0.2)',
+                    borderColor: '#a855f7',
+                    pointBackgroundColor: '#c084fc',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#a855f7',
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(0, 0, 0, 0.05)' },
+                        grid: { color: 'rgba(0, 0, 0, 0.05)' },
+                        pointLabels: {
+                            color: '#475569',
+                            font: { family: 'Inter', weight: 'bold', size: 12 }
+                        },
+                        ticks: { display: false, max: 10, min: 0 }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: commonTooltipConfig
+                }
+            }
+        });
+    </script>
+</body>
+</html>
